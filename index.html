@@ -23,16 +23,17 @@
   <section class="hero wrap">
     <p class="ar">حرف</p>
     <h1>Caligrafía árabe para llevar puesta</h1>
-    <p>Palabras con alma —paciencia, amor, gratitud, bendición— dibujadas en caligrafía tradicional e impresas en camisetas de algodón suave.</p>
+    <p>Palabras con alma —amor, paz, gratitud, Al-Ándalus— en caligrafía tradicional, impresas en camisetas y sudaderas. <b>Nueva colección de invierno.</b></p>
     <a class="btn" href="#tienda">Ver la colección</a>
   </section>
 
   <section id="tienda" class="wrap">
+    <div class="filters" id="filters"></div>
     <div class="grid" id="grid"></div>
   </section>
 
   <section class="wrap features">
-    <div><b>Hecho bajo pedido</b><p>Cada camiseta se imprime solo para ti, sin desperdicio.</p></div>
+    <div><b>Hecho bajo pedido</b><p>Cada prenda se imprime solo para ti, sin desperdicio.</p></div>
     <div><b>Producción en Europa</b><p>Impresa en la UE y enviada a tu casa en España.</p></div>
     <div><b>Pago seguro</b><p>Con tarjeta, Apple Pay o Google Pay mediante Stripe.</p></div>
     <div><b>14 días de desistimiento</b><p>Si no te convence, puedes devolverla. <a href="legal.html#devoluciones">Ver condiciones</a>.</p></div>
@@ -52,7 +53,7 @@
       <div>Color</div><div class="opts" id="pdColors"></div>
       <div id="pdSizeWrap"><div>Talla</div><div class="opts" id="pdSizes"></div></div>
       <button class="btn gold" id="pdBuy">Comprar ahora</button>
-      <p class="note">Bella+Canvas 3001 unisex, 100% algodón. Plazo de entrega: 7–14 días laborables. Eliges la talla (S–2XL) en la página de pago.</p>
+      <p class="note"><span id="pdNote"></span> Plazo de entrega: 7–14 días laborables. Eliges la talla (S–2XL) en la página de pago.</p>
     </div>
   </div>
 </dialog>
@@ -67,18 +68,27 @@
 const fmt = (n) => n.toFixed(2).replace(".", ",") + " " + STORE.currency;
 document.getElementById("y").textContent = new Date().getFullYear();
 const grid = document.getElementById("grid");
-grid.innerHTML = PRODUCTS.map((p) => `
-  <article class="card" data-k="${p.key}" tabindex="0">
-    <img loading="lazy" src="${p.colors.negro.img}" alt="Camiseta ${p.name} ${p.ar}">
-    <div class="info"><span class="ar">${p.ar}</span><h3>${p.name}</h3><small>${p.meaning}</small>
+const FILTERS = [["todo", "Todo"], ["nuevo", "Invierno ✦"], ["Sudadera", "Sudaderas"], ["Camiseta", "Camisetas"]];
+let filter = "todo";
+function drawGrid() {
+  filters.innerHTML = FILTERS.map(([k, l]) => `<button aria-pressed="${k === filter}" data-f="${k}">${l}</button>`).join("");
+  const list = PRODUCTS.filter((p) => filter === "todo" || (filter === "nuevo" ? p.isNew : p.type === filter));
+  grid.innerHTML = list.map((p) => `
+  <article class="card" data-k="${p.id}" tabindex="0">
+    ${p.isNew ? '<span class="badge">Nuevo</span>' : ""}
+    <img loading="lazy" src="${p.colors.negro.img}" alt="${p.type} ${p.name} ${p.ar}">
+    <div class="info"><span class="ar">${p.ar}</span><h3>${p.name}</h3><small>${p.type}</small>
     <div class="price">${fmt(p.price)}</div></div>
   </article>`).join("");
+}
+filters.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { filter = b.dataset.f; drawGrid(); } });
+drawGrid();
 
 const pd = document.getElementById("pd");
 let cur, color, size;
 function render() {
   const c = cur.colors[color];
-  pdImg.src = c.img; pdImg.alt = `Camiseta ${cur.name} ${c.label}`;
+  pdImg.src = c.img; pdImg.alt = `${cur.type} ${cur.name} ${c.label}`;
   pdColors.innerHTML = Object.entries(cur.colors).map(([k, v]) =>
     `<button aria-pressed="${k === color}" onclick="color='${k}';render()">${v.label}</button>`).join("");
   pdSizes.innerHTML = cur.sizes.map((s) =>
@@ -87,8 +97,8 @@ function render() {
   pdSizeWrap.hidden = !!c.stripe;
 }
 function openP(k) {
-  cur = PRODUCTS.find((p) => p.key === k); color = "negro"; size = "M";
-  pdAr.textContent = cur.ar; pdName.textContent = cur.name;
+  cur = PRODUCTS.find((p) => p.id === k); color = "negro"; size = "M";
+  pdAr.textContent = cur.ar; pdName.textContent = cur.type + " " + cur.name; pdNote.textContent = cur.note;
   pdMeaning.textContent = "«" + cur.meaning + "»"; pdText.textContent = cur.text;
   pdPrice.textContent = fmt(cur.price);
   render(); pd.showModal();
@@ -100,7 +110,7 @@ pdBuy.onclick = () => {
   const c = cur.colors[color];
   if (c.stripe) { location.href = c.stripe; return; }
   const subj = encodeURIComponent(`Pedido: ${cur.name} – ${c.label} – Talla ${size}`);
-  const body = encodeURIComponent(`Hola, quiero la camiseta ${cur.name} (${cur.ar}), color ${c.label}, talla ${size}.\n\nNombre:\nDirección de envío:\nTeléfono:`);
+  const body = encodeURIComponent(`Hola, quiero la prenda ${cur.type} ${cur.name} (${cur.ar}), color ${c.label}, talla ${size}.\n\nNombre:\nDirección de envío:\nTeléfono:`);
   location.href = `mailto:${STORE.email}?subject=${subj}&body=${body}`;
 };
 </script>

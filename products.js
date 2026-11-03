@@ -40,10 +40,206 @@ const PRODUCTS = [
     text: "Que la bendición te acompañe. Caligrafía Kufi, moderna y geométrica." },
 ].map((p) => ({
   ...p,
+  id: p.key,
+  type: "Camiseta",
   price: 29.95,
   sizes: ["S", "M", "L", "XL", "2XL"],
   colors: {
-    blanco: { label: "Blanco", img: MOCK(p.printify, 18542, p.slug), stripe: STRIPE_LINKS[p.key + "|blanco"] },
     negro: { label: "Negro", img: MOCK(p.printify, 18102, p.slug), stripe: STRIPE_LINKS[p.key + "|negro"] },
+    blanco: { label: "Blanco", img: MOCK(p.printify, 18542, p.slug), stripe: STRIPE_LINKS[p.key + "|blanco"] },
   },
 }));
+
+// Colección Invierno (noviembre 2026): camisetas y sudaderas.
+const TEE_NOTE = "Bella+Canvas 3001 unisex, 100% algodón.";
+const HOODIE_NOTE = "Sudadera con capucha unisex Gildan 18500, interior afelpado.";
+const WINTER_TEXT = {
+  ojala: { ar: "إن شاء الله", name: "Ojalá", meaning: "del árabe andalusí «law šá lláh»", text: "¿Sabías que «ojalá» viene del árabe? Una palabra que llevamos más de mil años diciendo en español." },
+  habibi: { ar: "حبيبي", name: "Habibi", meaning: "mi amor (él)", text: "La palabra árabe más querida: cariño, amor, amigo del alma. Combínala con Habibti." },
+  habibti: { ar: "حبيبتي", name: "Habibti", meaning: "mi amor (ella)", text: "«Mi amor» en femenino. El regalo de pareja perfecto junto a Habibi." },
+  yalla: { ar: "يلا", name: "Yalla", meaning: "¡vamos!", text: "La palabra con más energía del árabe, en caligrafía Rakkas. Para los que nunca se quedan quietos." },
+  andalus: { ar: "الأندلس", name: "Al-Ándalus", meaning: "Córdoba · Granada · Sevilla", text: "El arco de la Mezquita de Córdoba y «الأندلس» en caligrafía. Nuestra historia compartida." },
+  salam: { ar: "سلام", name: "Salam", meaning: "paz", text: "Un mensaje sencillo y universal. El regalo ideal para estas fiestas." },
+};
+const WINTER = [
+ {
+  "key": "ojala",
+  "type": "Sudadera",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea4490d08071d85809a9c6/32920/98424/sudadera-ojala-an-shaaa-allh.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/9B63cv46Z3Hx59KcUTdnW0f"
+   },
+   "arena": {
+    "img": "https://images-api.printify.com/mockup/6aea4490d08071d85809a9c6/42166/98424/sudadera-ojala-an-shaaa-allh.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/eVq28r9rjdi7eKk9IHdnW0c"
+   }
+  }
+ },
+ {
+  "key": "habibi",
+  "type": "Sudadera",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea4491eba4cf9b840bc19a/32920/98424/sudadera-habibi-hbyby.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/8x2dR99rj3Hx45Gg75dnW0h"
+   },
+   "arena": {
+    "img": "https://images-api.printify.com/mockup/6aea4491eba4cf9b840bc19a/42166/98424/sudadera-habibi-hbyby.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/9B66oH6f7b9ZeKk6wvdnW0j"
+   }
+  }
+ },
+ {
+  "key": "habibti",
+  "type": "Sudadera",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea4495eba4cf9b840bc1a0/32920/98424/sudadera-habibti-hbybty.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/00wfZh32V0vleKk2gfdnW0k"
+   },
+   "arena": {
+    "img": "https://images-api.printify.com/mockup/6aea4495eba4cf9b840bc1a0/42166/98424/sudadera-habibti-hbybty.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/cNicN532V1zpfOo8EDdnW0o"
+   }
+  }
+ },
+ {
+  "key": "andalus",
+  "type": "Sudadera",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea449940a6113740070e66/32920/98424/sudadera-al-andalus-alandls.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/7sY5kDfPHb9Zau4aMLdnW0u"
+   },
+   "arena": {
+    "img": "https://images-api.printify.com/mockup/6aea449940a6113740070e66/42166/98424/sudadera-al-andalus-alandls.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/aFa6oHdHzgujfOof31dnW0v"
+   }
+  }
+ },
+ {
+  "key": "yalla",
+  "type": "Sudadera",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea449661691e4afb0ea8e9/32920/98424/sudadera-yalla-yla.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/5kQfZheLDfqf59K6wvdnW0q"
+   },
+   "arena": {
+    "img": "https://images-api.printify.com/mockup/6aea449661691e4afb0ea8e9/42166/98424/sudadera-yalla-yla.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/dRm4gz9rj7XN9q03kjdnW0p"
+   }
+  }
+ },
+ {
+  "key": "salam",
+  "type": "Sudadera",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea449a7002cd705002bd45/32920/98424/sudadera-salam-slam-paz.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/eVq28r32V5PF6dOg75dnW0y"
+   },
+   "arena": {
+    "img": "https://images-api.printify.com/mockup/6aea449a7002cd705002bd45/42166/98424/sudadera-salam-slam-paz.jpg?camera_label=front",
+    "stripe": "https://buy.stripe.com/3cI00jbzr91R59K6wvdnW0z"
+   }
+  }
+ },
+ {
+  "key": "ojala",
+  "type": "Camiseta",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea449195144eca570ac6f0/18102/102044/camiseta-ojala-an-shaaa-allh.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/14AaEXcDvdi7dGg6wvdnW0d"
+   },
+   "blanco": {
+    "img": "https://images-api.printify.com/mockup/6aea449195144eca570ac6f0/18542/102044/camiseta-ojala-an-shaaa-allh.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/8x228rdHzguj6dO2gfdnW0e"
+   }
+  }
+ },
+ {
+  "key": "habibi",
+  "type": "Camiseta",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea449115984cb0cd0b813f/18102/102044/camiseta-habibi-hbyby.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/6oUcN5dHz3Hx59K8EDdnW0g"
+   },
+   "blanco": {
+    "img": "https://images-api.printify.com/mockup/6aea449115984cb0cd0b813f/18542/102044/camiseta-habibi-hbyby.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/4gM3cv8nffqf0TudYXdnW0i"
+   }
+  }
+ },
+ {
+  "key": "habibti",
+  "type": "Camiseta",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea44947a0b432491024df5/18102/102044/camiseta-habibti-hbybty.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/5kQ5kD8nf7XNcCc3kjdnW0m"
+   },
+   "blanco": {
+    "img": "https://images-api.printify.com/mockup/6aea44947a0b432491024df5/18542/102044/camiseta-habibti-hbybty.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/5kQ6oH32Vb9ZcCc3kjdnW0n"
+   }
+  }
+ },
+ {
+  "key": "andalus",
+  "type": "Camiseta",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea4499d08071d85809a9d0/18102/102044/camiseta-al-andalus-alandls.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/4gM00jeLD7XNeKkcUTdnW0r"
+   },
+   "blanco": {
+    "img": "https://images-api.printify.com/mockup/6aea4499d08071d85809a9d0/18542/102044/camiseta-al-andalus-alandls.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/fZu00jeLD4LB59K6wvdnW0t"
+   }
+  }
+ },
+ {
+  "key": "yalla",
+  "type": "Camiseta",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea44955a2fa4efad07f179/18102/102044/camiseta-yalla-yla.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/8x24gzavngujgSsbQPdnW0l"
+   },
+   "blanco": {
+    "img": "https://images-api.printify.com/mockup/6aea44955a2fa4efad07f179/18542/102044/camiseta-yalla-yla.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/eVqdR9bzr4LBgSsdYXdnW0s"
+   }
+  }
+ },
+ {
+  "key": "salam",
+  "type": "Camiseta",
+  "colors": {
+   "negro": {
+    "img": "https://images-api.printify.com/mockup/6aea449915984cb0cd0b814d/18102/102044/camiseta-salam-slam-paz.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/7sY00j6f74LBfOo087dnW0w"
+   },
+   "blanco": {
+    "img": "https://images-api.printify.com/mockup/6aea449915984cb0cd0b814d/18542/102044/camiseta-salam-slam-paz.jpg?camera_label=front-2",
+    "stripe": "https://buy.stripe.com/9B628r0UN5PF59KaMLdnW0x"
+   }
+  }
+ }
+];
+const LABELS = { negro: "Negro", blanco: "Blanco", arena: "Arena" };
+PRODUCTS.unshift(...WINTER.map((w) => ({
+  ...WINTER_TEXT[w.key],
+  key: w.key,
+  id: w.key + "-" + w.type.toLowerCase(),
+  type: w.type,
+  isNew: true,
+  price: w.type === "Sudadera" ? 49.95 : 29.95,
+  sizes: ["S", "M", "L", "XL", "2XL"],
+  colors: Object.fromEntries(Object.entries(w.colors).map(([c, v]) => [c, { label: LABELS[c], img: v.img + "&v=1", stripe: v.stripe }])),
+})));
+PRODUCTS.forEach((p) => { p.note = p.type === "Sudadera" ? HOODIE_NOTE : TEE_NOTE; });
