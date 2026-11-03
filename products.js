@@ -1,5 +1,5 @@
 // Catálogo de HARF. Cada producto existe en Printify (shop 29594313).
-// stripe: enlaces de pago de Stripe (Payment Links) por diseño y color. La talla se elige en el pago.
+// LINKS: enlaces de pago de Stripe (Payment Links) por "diseño|tipo|color". Aceptan códigos de descuento; la talla se elige en el pago.
 const STORE = {
   name: "HARF",
   email: "franse026@gmail.com",
@@ -10,20 +10,6 @@ const STORE = {
 const MOCK = (id, variant, slug) =>
   `https://images-api.printify.com/mockup/${id}/${variant}/102044/${slug}.jpg?camera_label=front-2&v=2`;
 
-const STRIPE_LINKS = {
-  "sabr|negro": "https://buy.stripe.com/14A6oHcDvgujgSsdYXdnW00",
-  "sabr|blanco": "https://buy.stripe.com/9B64gzcDva5V45Gg75dnW01",
-  "alhamdulillah|negro": "https://buy.stripe.com/00wdR946Z6TJ8lW5srdnW04",
-  "alhamdulillah|blanco": "https://buy.stripe.com/4gM14n1YR3Hx6dO5srdnW03",
-  "ramadan|negro": "https://buy.stripe.com/3cI5kDfPH2Dt8lWdYXdnW02",
-  "ramadan|blanco": "https://buy.stripe.com/eVq4gzdHzfqf0Tuf31dnW05",
-  "hubb|negro": "https://buy.stripe.com/3cI7sL5b31zp7hSdYXdnW08",
-  "hubb|blanco": "https://buy.stripe.com/4gM8wP46Z6TJby87AzdnW06",
-  "umi|negro": "https://buy.stripe.com/00w4gzfPH2DtfOo2gfdnW07",
-  "umi|blanco": "https://buy.stripe.com/14AfZh7jb6TJ9q0aMLdnW0b",
-  "baraka|negro": "https://buy.stripe.com/bJeeVddHz4LB7hS1cbdnW0a",
-  "baraka|blanco": "https://buy.stripe.com/28E7sLbzr4LB0TubQPdnW09",
-};
 
 const PRODUCTS = [
   { key: "sabr", ar: "صبر", name: "Sabr", meaning: "paciencia", printify: "6aea1f9a1fffd0f62b04a2a8", slug: "camiseta-sabr-sbr-paciencia",
@@ -45,8 +31,8 @@ const PRODUCTS = [
   price: 29.95,
   sizes: ["S", "M", "L", "XL", "2XL"],
   colors: {
-    negro: { label: "Negro", img: MOCK(p.printify, 18102, p.slug), stripe: STRIPE_LINKS[p.key + "|negro"] },
-    blanco: { label: "Blanco", img: MOCK(p.printify, 18542, p.slug), stripe: STRIPE_LINKS[p.key + "|blanco"] },
+    negro: { label: "Negro", img: MOCK(p.printify, 18102, p.slug) },
+    blanco: { label: "Blanco", img: MOCK(p.printify, 18542, p.slug) },
   },
 }));
 
@@ -240,6 +226,51 @@ PRODUCTS.unshift(...WINTER.map((w) => ({
   isNew: true,
   price: w.type === "Sudadera" ? 49.95 : 29.95,
   sizes: ["S", "M", "L", "XL", "2XL"],
-  colors: Object.fromEntries(Object.entries(w.colors).map(([c, v]) => [c, { label: LABELS[c], img: v.img + "&v=1", stripe: v.stripe }])),
+  colors: Object.fromEntries(Object.entries(w.colors).map(([c, v]) => [c, { label: LABELS[c], img: v.img + "&v=1" }])),
 })));
 PRODUCTS.forEach((p) => { p.note = p.type === "Sudadera" ? HOODIE_NOTE : TEE_NOTE; });
+
+// Precios (noviembre 2026) y enlaces de pago activos.
+const PRICES = { Camiseta: 24.95, Sudadera: 42.95 };
+const LINKS = {
+ "alhamdulillah|Camiseta|blanco": "https://buy.stripe.com/cNi5kDavnce31Xy5srdnW15",
+ "alhamdulillah|Camiseta|negro": "https://buy.stripe.com/fZu28r6f791RdGg3kjdnW17",
+ "andalus|Camiseta|blanco": "https://buy.stripe.com/5kQ00jdHzb9Z1Xy4ondnW0F",
+ "andalus|Camiseta|negro": "https://buy.stripe.com/fZu9AT9rj4LB8lW7AzdnW0G",
+ "andalus|Sudadera|arena": "https://buy.stripe.com/5kQ28r7jb5PF0Tu087dnW0E",
+ "andalus|Sudadera|negro": "https://buy.stripe.com/3cI8wP8nfa5VfOo087dnW0H",
+ "baraka|Camiseta|blanco": "https://buy.stripe.com/14A28r46Z3Hx0Tu4ondnW0Z",
+ "baraka|Camiseta|negro": "https://buy.stripe.com/5kQ7sL32Vguj9q0aMLdnW10",
+ "habibi|Camiseta|blanco": "https://buy.stripe.com/5kQeVd7jba5V1Xy3kjdnW0S",
+ "habibi|Camiseta|negro": "https://buy.stripe.com/4gM14n6f7a5VcCcaMLdnW0T",
+ "habibi|Sudadera|arena": "https://buy.stripe.com/5kQ8wPavn7XN8lWbQPdnW0Q",
+ "habibi|Sudadera|negro": "https://buy.stripe.com/7sY6oH46Z3Hx59Kf31dnW0R",
+ "habibti|Camiseta|blanco": "https://buy.stripe.com/7sYdR95b32Dt6dOdYXdnW0P",
+ "habibti|Camiseta|negro": "https://buy.stripe.com/aFa4gz32V3HxeKkbQPdnW0N",
+ "habibti|Sudadera|arena": "https://buy.stripe.com/eVq6oHavna5V9q01cbdnW0L",
+ "habibti|Sudadera|negro": "https://buy.stripe.com/00wcN50UN6TJ59K3kjdnW0O",
+ "hubb|Camiseta|blanco": "https://buy.stripe.com/6oUaEX8nfa5VdGg087dnW12",
+ "hubb|Camiseta|negro": "https://buy.stripe.com/14A7sLeLD1zp1Xy7AzdnW14",
+ "ojala|Camiseta|blanco": "https://buy.stripe.com/5kQ4gzdHzembgSsbQPdnW0V",
+ "ojala|Camiseta|negro": "https://buy.stripe.com/dRmeVdeLD7XNdGg087dnW0W",
+ "ojala|Sudadera|arena": "https://buy.stripe.com/4gM4gzeLDfqf8lW2gfdnW0X",
+ "ojala|Sudadera|negro": "https://buy.stripe.com/6oU6oH5b3emb1Xy7AzdnW0U",
+ "ramadan|Camiseta|blanco": "https://buy.stripe.com/6oUbJ16f70vl9q0087dnW13",
+ "ramadan|Camiseta|negro": "https://buy.stripe.com/4gMdR9gTL4LBcCc7AzdnW16",
+ "sabr|Camiseta|blanco": "https://buy.stripe.com/5kQ9AT6f7fqf6dO2gfdnW19",
+ "sabr|Camiseta|negro": "https://buy.stripe.com/cNicN58nf1zpeKkf31dnW18",
+ "salam|Camiseta|blanco": "https://buy.stripe.com/8x29ATbzrb9ZfOocUTdnW0A",
+ "salam|Camiseta|negro": "https://buy.stripe.com/5kQdR98nfgujcCc087dnW0D",
+ "salam|Sudadera|arena": "https://buy.stripe.com/00weVd32V0vldGg7AzdnW0C",
+ "salam|Sudadera|negro": "https://buy.stripe.com/fZu4gzavn91R8lWcUTdnW0B",
+ "umi|Camiseta|blanco": "https://buy.stripe.com/14AcN5cDvb9Z1Xy8EDdnW0Y",
+ "umi|Camiseta|negro": "https://buy.stripe.com/00waEX7jbce3dGgcUTdnW11",
+ "yalla|Camiseta|blanco": "https://buy.stripe.com/3cI7sLeLD1zpdGg2gfdnW0J",
+ "yalla|Camiseta|negro": "https://buy.stripe.com/4gM4gzdHz0vl7hS8EDdnW0K",
+ "yalla|Sudadera|arena": "https://buy.stripe.com/cNi9ATavnemb7hScUTdnW0I",
+ "yalla|Sudadera|negro": "https://buy.stripe.com/9B65kD1YR1zpeKk1cbdnW0M"
+};
+PRODUCTS.forEach((p) => {
+  p.price = PRICES[p.type];
+  for (const c in p.colors) p.colors[c].stripe = LINKS[`${p.key}|${p.type}|${c}`];
+});
