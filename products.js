@@ -230,9 +230,134 @@ PRODUCTS.unshift(...WINTER.map((w) => ({
 })));
 PRODUCTS.forEach((p) => { p.note = p.type === "Sudadera" ? HOODIE_NOTE : TEE_NOTE; });
 
+// Colección «Un idioma» (noviembre 2026): cada diseño en un solo idioma.
+const LANG_LABEL = { ar: "العربية", es: "Español", en: "English" };
+const IDIOMAS = [
+ {
+  "key": "yusra",
+  "lang": "ar",
+  "ar": "إن مع العسر يسرا",
+  "name": "Yusra",
+  "meaning": "Inna maʿa al-ʿusri yusrā",
+  "text": "«Con la dificultad llega la facilidad». Una frase para los días difíciles, en caligrafía Ruqaa.",
+  "printify": "6aea586915984cb0cd0b93da",
+  "slug": "camiseta-an-maa-alaasr-ysra"
+ },
+ {
+  "key": "qahwa",
+  "lang": "ar",
+  "ar": "قهوة",
+  "name": "Qahwa",
+  "meaning": "Qahwa · café",
+  "text": "La palabra árabe de la que nace «café». Para los que no empiezan el día sin ella.",
+  "printify": "6aea5869eba4cf9b840bd391",
+  "slug": "camiseta-kho"
+ },
+ {
+  "key": "nur",
+  "lang": "ar",
+  "ar": "نور",
+  "name": "Nur",
+  "meaning": "Nūr · luz",
+  "text": "Una sola palabra, toda la luz. Caligrafía Katibeh con estrella dorada.",
+  "printify": "6aea58695a2fa4efad0802d9",
+  "slug": "camiseta-nor"
+ },
+ {
+  "key": "azahar",
+  "lang": "es",
+  "ar": "",
+  "name": "Azahar",
+  "meaning": "La flor del naranjo",
+  "text": "Azahar: de origen andalusí. El olor de Sevilla y Valencia en primavera, en una camiseta.",
+  "printify": "6aea58695a2fa4efad0802d8",
+  "slug": "camiseta-azahar"
+ },
+ {
+  "key": "azucar",
+  "lang": "es",
+  "ar": "",
+  "name": "Azúcar",
+  "meaning": "Sí, también viene del árabe",
+  "text": "Azúcar viene del árabe «as-sukkar». Un diseño con humor para los curiosos de las palabras.",
+  "printify": "6aea586c5a2fa4efad0802da",
+  "slug": "camiseta-azucar"
+ },
+ {
+  "key": "almohada",
+  "lang": "es",
+  "ar": "",
+  "name": "Almohada",
+  "meaning": "De origen árabe, como las mejores cosas",
+  "text": "Almohada viene de «al-mujadda». Para los que aman dormir… y las palabras.",
+  "printify": "6aea586c365c19e4ba07b5c3",
+  "slug": "camiseta-almohada"
+ },
+ {
+  "key": "patience",
+  "lang": "en",
+  "ar": "",
+  "name": "Patience is beautiful",
+  "meaning": "Patience is beautiful",
+  "text": "La idea árabe de «sabr» —paciencia— en inglés y en tipografía clásica.",
+  "printify": "6aea586c7a0b432491025fd8",
+  "slug": "camiseta-patience-is-beautiful"
+ },
+ {
+  "key": "peace",
+  "lang": "en",
+  "ar": "",
+  "name": "Peace be with you",
+  "meaning": "Peace be with you",
+  "text": "El saludo «as-salamu alaykum», en inglés y con fuerza.",
+  "printify": "6aea586c365c19e4ba07b5c4",
+  "slug": "camiseta-peace-be-with-you"
+ },
+ {
+  "key": "everyletter",
+  "lang": "en",
+  "ar": "",
+  "name": "Every letter has a story",
+  "meaning": "Every letter has a story",
+  "text": "El lema de HARF: detrás de cada letra hay una historia.",
+  "printify": "6aea586f365c19e4ba07b5c6",
+  "slug": "camiseta-every-letter-has-a-story"
+ }
+];
+PRODUCTS.unshift(...IDIOMAS.map((p) => ({
+  ...p,
+  id: p.key + "-camiseta",
+  type: "Camiseta",
+  isNew: true,
+  sizes: ["S", "M", "L", "XL", "2XL"],
+  note: TEE_NOTE,
+  colors: {
+    negro: { label: "Negro", img: MOCK(p.printify, 18102, p.slug) },
+    blanco: { label: "Blanco", img: MOCK(p.printify, 18542, p.slug) },
+  },
+})));
+
 // Precios (noviembre 2026) y enlaces de pago activos.
 const PRICES = { Camiseta: 24.95, Sudadera: 42.95 };
 const LINKS = {
+ "yusra|Camiseta|negro": "https://buy.stripe.com/3cI14nfPHdi70Tug75dnW1a",
+ "yusra|Camiseta|blanco": "https://buy.stripe.com/3cI5kD5b37XN1Xy1cbdnW1b",
+ "qahwa|Camiseta|negro": "https://buy.stripe.com/7sYcN5dHz4LB9q0bQPdnW1c",
+ "qahwa|Camiseta|blanco": "https://buy.stripe.com/6oU7sL32Vdi78lWbQPdnW1d",
+ "nur|Camiseta|negro": "https://buy.stripe.com/6oU00jdHzdi70Tu5srdnW1e",
+ "nur|Camiseta|blanco": "https://buy.stripe.com/00weVd0UN6TJgSs1cbdnW1f",
+ "azahar|Camiseta|negro": "https://buy.stripe.com/6oUcN5dHz3Hx45G2gfdnW1g",
+ "azahar|Camiseta|blanco": "https://buy.stripe.com/28E5kD7jba5Vau4cUTdnW1h",
+ "azucar|Camiseta|negro": "https://buy.stripe.com/8x24gzgTLce3dGgdYXdnW1i",
+ "azucar|Camiseta|blanco": "https://buy.stripe.com/7sY5kD5b3guj6dO1cbdnW1j",
+ "almohada|Camiseta|negro": "https://buy.stripe.com/3cI8wP9rjb9Z7hSf31dnW1k",
+ "almohada|Camiseta|blanco": "https://buy.stripe.com/3cIfZh9rj1zp7hSdYXdnW1l",
+ "patience|Camiseta|negro": "https://buy.stripe.com/9B63cv8nfa5VfOof31dnW1m",
+ "patience|Camiseta|blanco": "https://buy.stripe.com/7sY14ncDv3Hx6dO6wvdnW1n",
+ "peace|Camiseta|negro": "https://buy.stripe.com/3cI8wP7jb7XNeKkaMLdnW1o",
+ "peace|Camiseta|blanco": "https://buy.stripe.com/6oU4gz8nf6TJ45G7AzdnW1p",
+ "everyletter|Camiseta|negro": "https://buy.stripe.com/eVq5kDdHzdi759KbQPdnW1q",
+ "everyletter|Camiseta|blanco": "https://buy.stripe.com/7sYbJ1cDva5V59KdYXdnW1r",
  "alhamdulillah|Camiseta|blanco": "https://buy.stripe.com/cNi5kDavnce31Xy5srdnW15",
  "alhamdulillah|Camiseta|negro": "https://buy.stripe.com/fZu28r6f791RdGg3kjdnW17",
  "andalus|Camiseta|blanco": "https://buy.stripe.com/5kQ00jdHzb9Z1Xy4ondnW0F",

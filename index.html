@@ -229,7 +229,7 @@ const strip = words.map(([a, e]) => `<span><span class="ar">${a}</span>${e.toUpp
 $("marquee").innerHTML = strip + strip;
 
 // Shop grid
-const FILTERS = [["todo", "Todo"], ["nuevo", "Invierno ✦"], ["Sudadera", "Sudaderas"], ["Camiseta", "Camisetas"]];
+const FILTERS = [["todo", "Todo"], ["nuevo", "Nuevo ✦"], ["Sudadera", "Sudaderas"], ["Camiseta", "Camisetas"], ["lang:ar", "العربية"], ["lang:es", "Español"], ["lang:en", "English"]];
 let filter = "todo";
 function card(p) {
   const cs = Object.keys(p.colors);
@@ -237,13 +237,13 @@ function card(p) {
     <div class="media">${p.isNew ? '<span class="badge">Nuevo</span>' : ""}
       <img class="main" loading="lazy" src="${p.colors[cs[0]].img}" alt="${p.type} ${p.name} ${p.ar}">
       ${cs[1] ? `<img class="alt" loading="lazy" src="${p.colors[cs[1]].img}" alt="">` : ""}</div>
-    <div class="info"><h3>${p.type} ${p.name}</h3><span class="ar" lang="ar">${p.ar}</span><small>${p.meaning}</small>
+    <div class="info"><h3>${p.type} ${p.name}</h3><span class="ar" lang="ar">${p.ar || ""}</span><small>${p.meaning}</small>
       <div class="row2">${priceHtml(p.price)}<span class="swatches">${cs.map((c) => `<i style="background:${HEX[c]}" title="${p.colors[c].label}"></i>`).join("")}</span></div></div>
   </article>`;
 }
 function drawGrid() {
   $("filters").innerHTML = FILTERS.map(([k, l]) => `<button aria-pressed="${k === filter}" data-f="${k}">${l}</button>`).join("");
-  const list = PRODUCTS.filter((p) => filter === "todo" || (filter === "nuevo" ? p.isNew : p.type === filter));
+  const list = PRODUCTS.filter((p) => filter === "todo" || (filter === "nuevo" ? p.isNew : filter.startsWith("lang:") ? p.lang === filter.slice(5) : p.type === filter));
   $("grid").innerHTML = list.map(card).join("");
 }
 $("filters").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { filter = b.dataset.f; drawGrid(); } });
