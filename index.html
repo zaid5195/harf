@@ -3,116 +3,259 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>HARF · حرف — Caligrafía árabe para llevar puesta</title>
-<meta name="description" content="Camisetas con caligrafía árabe: Sabr, Alhamdulillah, Ramadán Karim, Hubb, Umi y Baraka. Impresas bajo pedido en Europa y enviadas a toda España.">
+<title>HARF · حرف — Camisetas y sudaderas con caligrafía árabe</title>
+<meta name="description" content="Camisetas y sudaderas con caligrafía árabe: Ojalá, Habibi, Al-Ándalus, Sabr, Salam. Diseño propio, impresas bajo pedido en Europa y enviadas a toda España.">
+<meta name="theme-color" content="#1b1b1b">
+<meta property="og:type" content="website">
 <meta property="og:title" content="HARF · حرف — Caligrafía árabe para llevar puesta">
-<meta property="og:description" content="Camisetas con caligrafía árabe, impresas bajo pedido en Europa.">
+<meta property="og:description" content="Camisetas y sudaderas con caligrafía árabe, impresas bajo pedido en Europa.">
+<meta property="og:image" content="https://zaid5195.github.io/harf/social/01-intro.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231b1b1b'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' font-weight='700' text-anchor='middle' fill='%23e3c27a'%3EH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1774257084415-a3de1879fce2?auto=format&fit=crop&w=1600&q=70">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="banner">🎁 15% de descuento con el código <b>HARF15</b> · Envío a toda España 4,95 €</div>
+<div class="banner">🎁 −15 % con el código <b>HARF15</b> · Envío a toda España 4,95 €</div>
 <header class="top"><div class="wrap">
-  <a class="logo" href="./"><b>HARF</b><span>حرف</span></a>
-  <nav><a href="#tienda">Tienda</a><a href="legal.html#envios">Envíos</a><a href="legal.html#contacto">Contacto</a></nav>
+  <a class="logo" href="./" aria-label="HARF, inicio"><b>HARF</b><span>حرف</span></a>
+  <nav>
+    <a href="#tienda">Tienda</a>
+    <a href="#historia" class="hide-sm">Historia</a>
+    <a href="#faq">Ayuda</a>
+    <a href="https://www.instagram.com/harf.es/" target="_blank" rel="noopener" class="hide-sm">Instagram</a>
+  </nav>
 </div></header>
 
 <main>
-  <section class="hero wrap">
-    <p class="ar">حرف</p>
-    <h1>Caligrafía árabe para llevar puesta</h1>
-    <p>Palabras con alma —amor, paz, gratitud, Al-Ándalus— en caligrafía tradicional, impresas en camisetas y sudaderas. <b>Nueva colección de invierno.</b></p>
-    <a class="btn" href="#tienda">Ver la colección</a>
+  <section class="hero-img" style="background-image:url('https://images.unsplash.com/photo-1774257084415-a3de1879fce2?auto=format&fit=crop&w=1600&q=70')">
+    <div class="wrap">
+      <p class="ar" lang="ar">حرف</p>
+      <h1>Caligrafía árabe<br>para llevar puesta</h1>
+      <p>Palabras con alma —amor, paz, gratitud, Al-Ándalus— dibujadas en caligrafía tradicional. Nueva colección de invierno.</p>
+      <div class="hero-ctas">
+        <a class="btn gold" href="#tienda" data-go="Sudadera">Ver sudaderas</a>
+        <a class="btn light" href="#tienda" data-go="Camiseta">Ver camisetas</a>
+      </div>
+      <div class="hero-trust"><span>Diseño propio</span><span>Impreso en la UE</span><span>Pago seguro con Stripe</span><span>14 días de devolución</span></div>
+    </div>
+    <span class="credit">Foto: <a href="https://unsplash.com/@marziye_pov?utm_source=harf&utm_medium=referral" target="_blank" rel="noopener">Marziye</a> · Unsplash</span>
   </section>
 
-  <section id="tienda" class="wrap">
-    <div class="filters" id="filters"></div>
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marquee"></div></div>
+
+  <section id="tienda" class="section wrap">
+    <div class="shop-head">
+      <div>
+        <div class="eyebrow">La colección</div>
+        <h2>Elige tu palabra</h2>
+      </div>
+      <div class="filters" id="filters" role="toolbar" aria-label="Filtrar productos"></div>
+    </div>
     <div class="grid" id="grid"></div>
   </section>
 
-  <section class="wrap features">
-    <div><b>Hecho bajo pedido</b><p>Cada prenda se imprime solo para ti, sin desperdicio.</p></div>
-    <div><b>Producción en Europa</b><p>Impresa en la UE y enviada a tu casa en España.</p></div>
-    <div><b>Pago seguro</b><p>Con tarjeta, Apple Pay o Google Pay mediante Stripe.</p></div>
-    <div><b>14 días de desistimiento</b><p>Si no te convence, puedes devolverla. <a href="legal.html#devoluciones">Ver condiciones</a>.</p></div>
+  <section id="historia" class="section story">
+    <div class="wrap split">
+      <div class="photo" style="background-image:url('https://images.unsplash.com/photo-1705142937677-601d5c0e049d?auto=format&fit=crop&w=1000&q=70')" role="img" aria-label="Patio de los Leones, Alhambra de Granada">
+        <span class="credit">Foto: <a href="https://unsplash.com/@henryren?utm_source=harf&utm_medium=referral" target="_blank" rel="noopener">Henry Ren</a> · Unsplash</span>
+      </div>
+      <div>
+        <div class="eyebrow">Nuestra historia</div>
+        <p class="quote">¿Sabías que <b>«ojalá»</b> viene del árabe <span class="ar" lang="ar">إن شاء الله</span>?</p>
+        <p class="lead">Durante ocho siglos, el árabe y el castellano convivieron en Al-Ándalus. Hoy usamos más de 4.000 palabras de origen árabe sin darnos cuenta. HARF —«letra» en árabe— nace para llevar esa herencia con orgullo.</p>
+        <ul class="word-list">
+          <li><b>Ojalá</b><span>law šá lláh · si Dios quiere</span></li>
+          <li><b>Aceite</b><span>az-zayt · el aceite</span></li>
+          <li><b>Azúcar</b><span>as-sukkar</span></li>
+          <li><b>Almohada</b><span>al-mujadda · el cojín</span></li>
+        </ul>
+        <button class="btn" data-open="ojala-sudadera">Ver la sudadera Ojalá</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="gift">
+      <div>
+        <div class="eyebrow" style="color:#e3c27a">Regalo de Navidad</div>
+        <h2>Habibi &amp; Habibti</h2>
+        <p>«Mi amor» en árabe, para él y para ella. El regalo de pareja que no tiene nadie más. Pide antes del 10 de diciembre para recibirlo a tiempo.</p>
+        <a class="btn gold" href="#tienda" data-go="nuevo">Ver colección de invierno</a>
+      </div>
+      <div class="pair" id="pair"></div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="features">
+      <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg><b>Hecho bajo pedido</b><p>Cada prenda se imprime solo para ti. Cero stock, cero desperdicio.</p></div>
+      <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7" stroke-linejoin="round"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><b>Envío a toda España</b><p>Impreso en la Unión Europea. Sin aduanas, 7–14 días laborables.</p></div>
+      <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><b>Pago 100% seguro</b><p>Tarjeta, Apple Pay o Google Pay con Stripe. No guardamos tus datos.</p></div>
+      <div class="feature"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 1 0 3-6.2M4 4v4h4" stroke-linecap="round" stroke-linejoin="round"/></svg><b>14 días para devolver</b><p>¿No te convence? Puedes devolverla. <a href="legal.html#devoluciones">Condiciones</a>.</p></div>
+    </div>
+  </section>
+
+  <section id="faq" class="section wrap">
+    <div class="eyebrow">Ayuda</div>
+    <h2>Preguntas frecuentes</h2>
+    <div class="faq">
+      <details><summary>¿Qué talla elijo?</summary><p>Las prendas son unisex de corte regular. Si te gusta holgada, elige una talla más. Consulta la <a href="#" data-sizes>guía de tallas</a> con medidas en centímetros.</p></details>
+      <details><summary>¿Cuánto tarda en llegar?</summary><p>Cada prenda se imprime bajo pedido (2–5 días) y luego se envía (4–8 días). En total, 7–14 días laborables a toda España peninsular y Baleares.</p></details>
+      <details><summary>¿Cómo uso un código de descuento?</summary><p>Al pulsar «Comprar» se abre la página de pago segura. Pulsa «Añadir código promocional» y escribe tu código, por ejemplo <b>HARF15</b>.</p></details>
+      <details><summary>¿Qué significa cada palabra?</summary><p>Cada producto explica su significado. Todas son palabras positivas: amor, paz, paciencia, gratitud, bendición…</p></details>
+      <details><summary>¿Puedo devolverla?</summary><p>Sí, tienes 14 días desde que la recibes. Si llega con un defecto de impresión, te la reponemos gratis. <a href="legal.html#devoluciones">Ver condiciones</a>.</p></details>
+      <details><summary>¿Cómo lavo la prenda?</summary><p>Del revés, a 30 °C, sin secadora y sin planchar sobre el diseño. Así la caligrafía dura años.</p></details>
+    </div>
+  </section>
+
+  <section class="section wrap ig">
+    <p class="ar" lang="ar">شكراً</p>
+    <h2>Síguenos en Instagram</h2>
+    <p class="lead" style="margin:0 auto 22px">Nuevos diseños, historias de palabras y descuentos exclusivos.</p>
+    <a class="btn" href="https://www.instagram.com/harf.es/" target="_blank" rel="noopener">@harf.es</a>
   </section>
 </main>
 
-<dialog id="pd">
-  <button class="close" aria-label="Cerrar" onclick="pd.close()">×</button>
+<dialog id="pd" aria-labelledby="pdName">
+  <button class="close" aria-label="Cerrar" data-close>×</button>
   <div class="pd">
-    <img id="pdImg" alt="">
+    <div class="gallery"><img id="pdImg" alt=""><div class="thumbs" id="pdThumbs"></div></div>
     <div class="body">
-      <div class="ar" id="pdAr"></div>
+      <div class="ar" id="pdAr" lang="ar"></div>
       <h2 id="pdName"></h2>
       <p class="muted" id="pdMeaning"></p>
       <p id="pdText"></p>
-      <p><b id="pdPrice"></b> <span class="muted">+ envío</span></p>
-      <div>Color</div><div class="opts" id="pdColors"></div>
-      <div id="pdSizeWrap"><div>Talla</div><div class="opts" id="pdSizes"></div></div>
-      <button class="btn gold" id="pdBuy">Comprar ahora</button>
-      <p class="note"><span id="pdNote"></span> Plazo de entrega: 7–14 días laborables. Eliges la talla (S–2XL) en la página de pago.</p>
+      <div class="pprice"><span id="pdPrice"></span> <small>IVA incluido · + 4,95 € envío</small></div>
+      <div class="opt-label">Color <span id="pdColorName" class="muted"></span></div>
+      <div class="opts" id="pdColors"></div>
+      <div class="opt-label">Talla <a href="#" data-sizes>Guía de tallas</a></div>
+      <p class="muted" style="margin:0;font-size:14px">Eliges tu talla (S–2XL) en la página de pago.</p>
+      <div style="margin-top:18px"><button class="btn gold block" id="pdBuy">Comprar ahora</button></div>
+      <div class="code-hint">🎁 Usa el código <b>HARF15</b> en el pago y ahorra un 15 %.</div>
+      <ul class="bullets">
+        <li id="pdNote"></li>
+        <li>Impreso bajo pedido en la UE · entrega en 7–14 días laborables</li>
+        <li>14 días de desistimiento · pago seguro con Stripe</li>
+      </ul>
     </div>
   </div>
 </dialog>
 
+<dialog id="sizes" aria-labelledby="sizesTitle">
+  <button class="close" aria-label="Cerrar" data-close>×</button>
+  <div class="body">
+    <div class="eyebrow">Medidas de la prenda en cm</div>
+    <h2 id="sizesTitle" class="serif" style="font-size:32px;margin:6px 0 4px">Guía de tallas</h2>
+    <p class="muted" style="margin:0">Ancho: de axila a axila. Largo: desde el hombro.</p>
+    <h3 style="margin:20px 0 0;font-size:16px">Camiseta (Bella+Canvas 3001)</h3>
+    <table class="size-table"><tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>2XL</th></tr>
+      <tr><th>Ancho</th><td>46</td><td>51</td><td>56</td><td>61</td><td>66</td></tr>
+      <tr><th>Largo</th><td>71</td><td>74</td><td>76</td><td>79</td><td>81</td></tr></table>
+    <h3 style="margin:22px 0 0;font-size:16px">Sudadera (Gildan 18500)</h3>
+    <table class="size-table"><tr><th></th><th>S</th><th>M</th><th>L</th><th>XL</th><th>2XL</th></tr>
+      <tr><th>Ancho</th><td>51</td><td>56</td><td>61</td><td>66</td><td>71</td></tr>
+      <tr><th>Largo</th><td>69</td><td>71</td><td>74</td><td>76</td><td>79</td></tr></table>
+    <p class="muted" style="font-size:14px;margin-top:16px">¿Entre dos tallas? Elige la más grande si te gusta holgada.</p>
+  </div>
+</dialog>
+
 <footer><div class="wrap">
-  <div>© <span id="y"></span> HARF · حرف</div>
-  <div><a href="legal.html#aviso">Aviso legal</a><a href="legal.html#privacidad">Privacidad</a><a href="legal.html#devoluciones">Devoluciones</a><a href="legal.html#contacto">Contacto</a></div>
+  <div class="cols">
+    <div>
+      <a class="logo" href="./"><b>HARF</b><span>حرف</span></a>
+      <p style="max-width:340px">Camisetas y sudaderas con caligrafía árabe. Diseñadas en Tarragona, impresas bajo pedido en Europa.</p>
+    </div>
+    <div><h4>Tienda</h4><a href="#tienda" data-go="Sudadera">Sudaderas</a><a href="#tienda" data-go="Camiseta">Camisetas</a><a href="#tienda" data-go="nuevo">Invierno</a></div>
+    <div><h4>Ayuda</h4><a href="#faq">Preguntas frecuentes</a><a href="legal.html#envios">Envíos</a><a href="legal.html#devoluciones">Devoluciones</a><a href="legal.html#contacto">Contacto</a></div>
+  </div>
+  <div class="fine">
+    <span>© <span id="y"></span> HARF · <a href="legal.html#aviso">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a></span>
+    <span>Fotos: <a href="https://unsplash.com/?utm_source=harf&utm_medium=referral" target="_blank" rel="noopener">Unsplash</a> (Marziye, Henry Ren)</span>
+  </div>
 </div></footer>
 
 <script src="products.js"></script>
 <script>
-const fmt = (n) => n.toFixed(2).replace(".", ",") + " " + STORE.currency;
-document.getElementById("y").textContent = new Date().getFullYear();
-const grid = document.getElementById("grid");
+const $ = (id) => document.getElementById(id);
+const fmt = (n) => n.toFixed(2).replace(".", ",") + " €";
+const HEX = { negro: "#1b1b1b", blanco: "#f4f3ef", arena: "#d8c3a0" };
+$("y").textContent = new Date().getFullYear();
+
+// Marquee of words
+const words = [["حب", "amor"], ["سلام", "paz"], ["صبر", "paciencia"], ["بركة", "bendición"], ["يلا", "¡vamos!"], ["حبيبي", "mi amor"], ["الأندلس", "Al-Ándalus"], ["أمي", "mi madre"]];
+const strip = words.map(([a, e]) => `<span><span class="ar">${a}</span>${e.toUpperCase()}</span>`).join("");
+$("marquee").innerHTML = strip + strip;
+
+// Shop grid
 const FILTERS = [["todo", "Todo"], ["nuevo", "Invierno ✦"], ["Sudadera", "Sudaderas"], ["Camiseta", "Camisetas"]];
 let filter = "todo";
-function drawGrid() {
-  filters.innerHTML = FILTERS.map(([k, l]) => `<button aria-pressed="${k === filter}" data-f="${k}">${l}</button>`).join("");
-  const list = PRODUCTS.filter((p) => filter === "todo" || (filter === "nuevo" ? p.isNew : p.type === filter));
-  grid.innerHTML = list.map((p) => `
-  <article class="card" data-k="${p.id}" tabindex="0">
-    ${p.isNew ? '<span class="badge">Nuevo</span>' : ""}
-    <img loading="lazy" src="${p.colors.negro.img}" alt="${p.type} ${p.name} ${p.ar}">
-    <div class="info"><span class="ar">${p.ar}</span><h3>${p.name}</h3><small>${p.type}</small>
-    <div class="price">${fmt(p.price)}</div></div>
-  </article>`).join("");
+function card(p) {
+  const cs = Object.keys(p.colors);
+  return `<article class="card" data-k="${p.id}" tabindex="0" role="button" aria-label="${p.type} ${p.name}, ${fmt(p.price)}">
+    <div class="media">${p.isNew ? '<span class="badge">Nuevo</span>' : ""}
+      <img class="main" loading="lazy" src="${p.colors[cs[0]].img}" alt="${p.type} ${p.name} ${p.ar}">
+      ${cs[1] ? `<img class="alt" loading="lazy" src="${p.colors[cs[1]].img}" alt="">` : ""}</div>
+    <div class="info"><h3>${p.type} ${p.name}</h3><span class="ar" lang="ar">${p.ar}</span><small>${p.meaning}</small>
+      <div class="row2"><span class="price">${fmt(p.price)}</span><span class="swatches">${cs.map((c) => `<i style="background:${HEX[c]}" title="${p.colors[c].label}"></i>`).join("")}</span></div></div>
+  </article>`;
 }
-filters.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { filter = b.dataset.f; drawGrid(); } });
+function drawGrid() {
+  $("filters").innerHTML = FILTERS.map(([k, l]) => `<button aria-pressed="${k === filter}" data-f="${k}">${l}</button>`).join("");
+  const list = PRODUCTS.filter((p) => filter === "todo" || (filter === "nuevo" ? p.isNew : p.type === filter));
+  $("grid").innerHTML = list.map(card).join("");
+}
+$("filters").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { filter = b.dataset.f; drawGrid(); } });
+document.querySelectorAll("[data-go]").forEach((a) => a.addEventListener("click", () => { filter = a.dataset.go; drawGrid(); }));
 drawGrid();
 
-const pd = document.getElementById("pd");
-let cur, color, size;
+// Gift pair
+$("pair").innerHTML = ["habibi-sudadera", "habibti-sudadera"].map((id) => {
+  const p = PRODUCTS.find((x) => x.id === id);
+  return `<button data-open="${id}"><img loading="lazy" src="${p.colors.negro.img}" alt="Sudadera ${p.name}"><span>${p.name}<em>${p.ar}</em></span></button>`;
+}).join("");
+
+// Product dialog
+const pd = $("pd");
+let cur, color;
 function render() {
   const c = cur.colors[color];
-  pdImg.src = c.img; pdImg.alt = `${cur.type} ${cur.name} ${c.label}`;
-  pdColors.innerHTML = Object.entries(cur.colors).map(([k, v]) =>
-    `<button aria-pressed="${k === color}" onclick="color='${k}';render()">${v.label}</button>`).join("");
-  pdSizes.innerHTML = cur.sizes.map((s) =>
-    `<button aria-pressed="${s === size}" onclick="size='${s}';render()">${s}</button>`).join("");
-  pdBuy.textContent = c.stripe ? "Comprar ahora · " + fmt(cur.price) : "Reservar por email";
-  pdSizeWrap.hidden = !!c.stripe;
+  $("pdImg").src = c.img; $("pdImg").alt = `${cur.type} ${cur.name} ${c.label}`;
+  $("pdColorName").textContent = c.label;
+  $("pdColors").innerHTML = Object.entries(cur.colors).map(([k, v]) =>
+    `<button aria-pressed="${k === color}" data-c="${k}"><i style="background:${HEX[k]}"></i>${v.label}</button>`).join("");
+  $("pdThumbs").innerHTML = Object.entries(cur.colors).map(([k, v]) =>
+    `<button aria-pressed="${k === color}" data-c="${k}" aria-label="${v.label}"><img src="${v.img}" alt=""></button>`).join("");
+  $("pdBuy").textContent = c.stripe ? "Comprar ahora · " + fmt(cur.price) : "Reservar por email";
 }
-function openP(k) {
-  cur = PRODUCTS.find((p) => p.id === k); color = "negro"; size = "M";
-  pdAr.textContent = cur.ar; pdName.textContent = cur.type + " " + cur.name; pdNote.textContent = cur.note;
-  pdMeaning.textContent = "«" + cur.meaning + "»"; pdText.textContent = cur.text;
-  pdPrice.textContent = fmt(cur.price);
+function openP(id) {
+  cur = PRODUCTS.find((p) => p.id === id); if (!cur) return;
+  color = Object.keys(cur.colors)[0];
+  $("pdAr").textContent = cur.ar; $("pdName").textContent = cur.type + " " + cur.name;
+  $("pdMeaning").textContent = cur.meaning.includes("«") ? cur.meaning : "«" + cur.meaning + "»"; $("pdText").textContent = cur.text;
+  $("pdPrice").textContent = fmt(cur.price); $("pdNote").textContent = cur.note;
   render(); pd.showModal();
+  history.replaceState(null, "", "#p=" + id);
 }
-grid.addEventListener("click", (e) => { const c = e.target.closest(".card"); if (c) openP(c.dataset.k); });
-grid.addEventListener("keydown", (e) => { const c = e.target.closest(".card"); if (c && e.key === "Enter") openP(c.dataset.k); });
-pd.addEventListener("click", (e) => { if (e.target === pd) pd.close(); });
-pdBuy.onclick = () => {
+["pdColors", "pdThumbs"].forEach((id) => $(id).addEventListener("click", (e) => { const b = e.target.closest("[data-c]"); if (b) { color = b.dataset.c; render(); } }));
+$("grid").addEventListener("click", (e) => { const c = e.target.closest(".card"); if (c) openP(c.dataset.k); });
+$("grid").addEventListener("keydown", (e) => { const c = e.target.closest(".card"); if (c && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); openP(c.dataset.k); } });
+document.addEventListener("click", (e) => {
+  const o = e.target.closest("[data-open]"); if (o) openP(o.dataset.open);
+  const s = e.target.closest("[data-sizes]"); if (s) { e.preventDefault(); $("sizes").showModal(); }
+  const x = e.target.closest("[data-close]"); if (x) x.closest("dialog").close();
+});
+document.querySelectorAll("dialog").forEach((d) => d.addEventListener("click", (e) => { if (e.target === d) d.close(); }));
+pd.addEventListener("close", () => history.replaceState(null, "", location.pathname));
+$("pdBuy").onclick = () => {
   const c = cur.colors[color];
   if (c.stripe) { location.href = c.stripe; return; }
-  const subj = encodeURIComponent(`Pedido: ${cur.name} – ${c.label} – Talla ${size}`);
-  const body = encodeURIComponent(`Hola, quiero la prenda ${cur.type} ${cur.name} (${cur.ar}), color ${c.label}, talla ${size}.\n\nNombre:\nDirección de envío:\nTeléfono:`);
-  location.href = `mailto:${STORE.email}?subject=${subj}&body=${body}`;
+  location.href = `mailto:${STORE.email}?subject=${encodeURIComponent("Pedido: " + cur.type + " " + cur.name + " – " + c.label)}`;
 };
+// Deep link: #p=<id> opens a product (handy for Instagram links)
+const m = location.hash.match(/^#p=([\w-]+)/); if (m) openP(m[1]);
 </script>
 </body>
 </html>
