@@ -46,7 +46,7 @@ Así funciona HARF:
 1️⃣ Eliges tu palabra y tu talla.
 2️⃣ La imprimimos solo para ti en Europa (cero desperdicio).
 3️⃣ Te llega a casa en 7–14 días laborables.
-Envío a toda España · gratis desde 60 €.
+Envío a toda España por 4,95 €.
 #hechobajopedido #modasostenible #caligrafiaarabe #tiendaonline
 
 ## 09-ramadan

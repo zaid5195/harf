@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="banner">Envío a toda España · Gratis a partir de 60 € · Preparado bajo pedido en Europa</div>
+<div class="banner">Envío a toda España por 4,95 € · Hecho bajo pedido en Europa · Pago seguro</div>
 <header class="top"><div class="wrap">
   <a class="logo" href="./"><b>HARF</b><span>حرف</span></a>
   <nav><a href="#tienda">Tienda</a><a href="legal.html#envios">Envíos</a><a href="legal.html#contacto">Contacto</a></nav>
@@ -50,9 +50,9 @@
       <p id="pdText"></p>
       <p><b id="pdPrice"></b> <span class="muted">+ envío</span></p>
       <div>Color</div><div class="opts" id="pdColors"></div>
-      <div>Talla</div><div class="opts" id="pdSizes"></div>
+      <div id="pdSizeWrap"><div>Talla</div><div class="opts" id="pdSizes"></div></div>
       <button class="btn gold" id="pdBuy">Comprar ahora</button>
-      <p class="note">Bella+Canvas 3001 unisex, 100% algodón. Plazo de entrega: 7–14 días laborables. La talla se elige también en el pago.</p>
+      <p class="note">Bella+Canvas 3001 unisex, 100% algodón. Plazo de entrega: 7–14 días laborables. Eliges la talla (S–2XL) en la página de pago.</p>
     </div>
   </div>
 </dialog>
@@ -83,7 +83,8 @@ function render() {
     `<button aria-pressed="${k === color}" onclick="color='${k}';render()">${v.label}</button>`).join("");
   pdSizes.innerHTML = cur.sizes.map((s) =>
     `<button aria-pressed="${s === size}" onclick="size='${s}';render()">${s}</button>`).join("");
-  pdBuy.textContent = c.stripe ? "Comprar ahora" : "Reservar por email";
+  pdBuy.textContent = c.stripe ? "Comprar ahora · " + fmt(cur.price) : "Reservar por email";
+  pdSizeWrap.hidden = !!c.stripe;
 }
 function openP(k) {
   cur = PRODUCTS.find((p) => p.key === k); color = "negro"; size = "M";
