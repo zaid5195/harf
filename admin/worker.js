@@ -74,18 +74,24 @@ async function summary(env) {
 }
 
 async function listCodes(env) {
-  const r = await stripe(env, "GET", "/promotion_codes", { limit: "100", "expand[]": "data.coupon" });
-  return r.data.map((p) => ({
-    id: p.id,
-    code: p.code,
-    active: p.active,
-    percent: p.coupon.percent_off,
-    amount: p.coupon.amount_off ? p.coupon.amount_off / 100 : null,
-    used: p.times_redeemed,
-    max: p.max_redemptions,
-    expires: p.expires_at,
-    firstOrder: !!p.restrictions?.first_time_transaction,
-  }));
+  // Newer Stripe API versions nest the coupon under `promotion`; older ones use `coupon`.
+  let r;
+  try { r = await stripe(env, "GET", "/promotion_codes", { limit: "100", "expand[]": "data.promotion.coupon" }); }
+  catch { r = await stripe(env, "GET", "/promotion_codes", { limit: "100", "expand[]": "data.coupon" }); }
+  return r.data.map((p) => {
+    const c = (typeof p.coupon === "object" && p.coupon) || (typeof p.promotion?.coupon === "object" && p.promotion.coupon) || {};
+    return {
+      id: p.id,
+      code: p.code,
+      active: p.active,
+      percent: c.percent_off || null,
+      amount: c.amount_off ? c.amount_off / 100 : null,
+      used: p.times_redeemed,
+      max: p.max_redemptions,
+      expires: p.expires_at,
+      firstOrder: !!p.restrictions?.first_time_transaction,
+    };
+  });
 }
 
 async function createCode(env, b) {
@@ -97,11 +103,16 @@ async function createCode(env, b) {
   else if (amount > 0 && amount <= 20) { coupon.amount_off = String(Math.round(amount * 100)); coupon.currency = "eur"; }
   else throw new Error("Pon un % entre 1 y 50, o un importe entre 1 y 20 €.");
   const c = await stripe(env, "POST", "/coupons", coupon);
-  const promo = { coupon: c.id, code };
+  const promo = { code };
   if (Number(b.max) > 0) promo.max_redemptions = String(Math.floor(b.max));
   if (Number(b.days) > 0) promo.expires_at = String(Math.floor(Date.now() / 1000 + b.days * 86400));
   if (b.firstOrder) promo["restrictions[first_time_transaction]"] = "true";
-  return stripe(env, "POST", "/promotion_codes", promo);
+  try {
+    return await stripe(env, "POST", "/promotion_codes", { ...promo, "promotion[type]": "coupon", "promotion[coupon]": c.id });
+  } catch (e) {
+    if (!/promotion/.test(e.message)) throw e;
+    return stripe(env, "POST", "/promotion_codes", { ...promo, coupon: c.id });
+  }
 }
 
 export default {
