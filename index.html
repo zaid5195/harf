@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="banner">🎁 −15 % con el código <b>HARF15</b> · Envío a toda España 4,95 €</div>
+<div class="banner" id="banner">🎁 −15 % con el código <b>HARF15</b> · Envío a toda España 4,95 €</div>
 <header class="top"><div class="wrap">
   <a class="logo" href="./" aria-label="HARF, inicio"><b>HARF</b><span>حرف</span></a>
   <nav>
@@ -134,7 +134,7 @@
       <div class="opt-label">Talla <a href="#" data-sizes>Guía de tallas</a></div>
       <p class="muted" style="margin:0;font-size:14px">Eliges tu talla (S–2XL) en la página de pago.</p>
       <div style="margin-top:18px"><button class="btn gold block" id="pdBuy">Comprar ahora</button></div>
-      <div class="code-hint">🎁 Usa el código <b>HARF15</b> en el pago y ahorra un 15 %.</div>
+      <div class="code-hint" id="codeHint">🎁 Usa el código <b>HARF15</b> en el pago y ahorra un 15 %.</div>
       <ul class="bullets">
         <li id="pdNote"></li>
         <li>Impreso bajo pedido en la UE · entrega en 7–14 días laborables</li>
@@ -184,6 +184,45 @@ const fmt = (n) => n.toFixed(2).replace(".", ",") + " €";
 const HEX = { negro: "#1b1b1b", blanco: "#f4f3ef", arena: "#d8c3a0" };
 $("y").textContent = new Date().getFullYear();
 
+// Promotions switch by date (Europe/Madrid). First match wins.
+const PROMOS = [
+  { from: "2026-11-27T00:00:00+01:00", to: "2026-12-01T00:00:00+01:00", code: "BLACKFRIDAY", pct: 20, bf: true,
+    banner: "🖤 <b>BLACK FRIDAY</b> · −20 % en todo con el código <b>BLACKFRIDAY</b> · termina en <span id=\"cd\"></span>" },
+  { from: "2026-11-20T00:00:00+01:00", to: "2026-11-27T00:00:00+01:00", code: "BIENVENIDA10", pct: 10, teaser: true,
+    banner: "🖤 <b>BLACK FRIDAY</b> llega el viernes 27: −20 % en todo · empieza en <span id=\"cd\"></span>" },
+  { from: "2026-11-03T00:00:00+01:00", to: "2026-11-18T00:00:00+01:00", code: "HARF15", pct: 15,
+    banner: "🎁 −15 % con el código <b>HARF15</b> · Envío a toda España 4,95 €" },
+  { from: "2026-01-01T00:00:00+01:00", to: "2099-01-01T00:00:00+01:00", code: "BIENVENIDA10", pct: 10, firstOrder: true,
+    banner: "🎁 −10 % en tu primer pedido con el código <b>BIENVENIDA10</b> · Envío a toda España 4,95 €" },
+];
+const NOW = new Date((new URLSearchParams(location.search).get("now") || "").replace(" ", "+") || Date.now());
+const PROMO = PROMOS.find((x) => NOW >= new Date(x.from) && NOW < new Date(x.to));
+const priceHtml = (n) => PROMO && PROMO.bf
+  ? `<span class="price"><s class="old">${fmt(n)}</s> ${fmt(n * (1 - PROMO.pct / 100))}</span>`
+  : `<span class="price">${fmt(n)}</span>`;
+if (PROMO) {
+  $("banner").innerHTML = PROMO.banner;
+  $("codeHint").innerHTML = PROMO.bf
+    ? `🖤 <b>Black Friday:</b> escribe <b>BLACKFRIDAY</b> en el pago y el precio baja un 20 %.`
+    : `🎁 Usa el código <b>${PROMO.code}</b> en el pago y ahorra un ${PROMO.pct} %${PROMO.firstOrder ? " en tu primer pedido" : ""}.`;
+  if (PROMO.bf || PROMO.teaser) document.body.classList.add("bf");
+  const cd = document.getElementById("cd");
+  if (cd) {
+    const end = new Date(PROMO.bf ? PROMO.to : PROMOS[0].from);
+    const tick = () => {
+      const t = Math.max(0, end - Date.now()), d = Math.floor(t / 864e5), h = Math.floor(t / 36e5) % 24, m = Math.floor(t / 6e4) % 60, s = Math.floor(t / 1e3) % 60;
+      cd.textContent = (d ? d + "d " : "") + String(h).padStart(2, "0") + ":" + String(m).padStart(2, "0") + ":" + String(s).padStart(2, "0");
+    };
+    tick(); setInterval(tick, 1000);
+  }
+  if (PROMO.bf) {
+    const r = document.createElement("div");
+    r.className = "bf-ribbon";
+    r.innerHTML = "<b>BLACK FRIDAY</b><span>−20 %</span><small>código BLACKFRIDAY</small>";
+    document.querySelector(".hero-img .wrap").prepend(r);
+  }
+}
+
 // Marquee of words
 const words = [["حب", "amor"], ["سلام", "paz"], ["صبر", "paciencia"], ["بركة", "bendición"], ["يلا", "¡vamos!"], ["حبيبي", "mi amor"], ["الأندلس", "Al-Ándalus"], ["أمي", "mi madre"]];
 const strip = words.map(([a, e]) => `<span><span class="ar">${a}</span>${e.toUpperCase()}</span>`).join("");
@@ -199,7 +238,7 @@ function card(p) {
       <img class="main" loading="lazy" src="${p.colors[cs[0]].img}" alt="${p.type} ${p.name} ${p.ar}">
       ${cs[1] ? `<img class="alt" loading="lazy" src="${p.colors[cs[1]].img}" alt="">` : ""}</div>
     <div class="info"><h3>${p.type} ${p.name}</h3><span class="ar" lang="ar">${p.ar}</span><small>${p.meaning}</small>
-      <div class="row2"><span class="price">${fmt(p.price)}</span><span class="swatches">${cs.map((c) => `<i style="background:${HEX[c]}" title="${p.colors[c].label}"></i>`).join("")}</span></div></div>
+      <div class="row2">${priceHtml(p.price)}<span class="swatches">${cs.map((c) => `<i style="background:${HEX[c]}" title="${p.colors[c].label}"></i>`).join("")}</span></div></div>
   </article>`;
 }
 function drawGrid() {
@@ -235,7 +274,7 @@ function openP(id) {
   color = Object.keys(cur.colors)[0];
   $("pdAr").textContent = cur.ar; $("pdName").textContent = cur.type + " " + cur.name;
   $("pdMeaning").textContent = cur.meaning.includes("«") ? cur.meaning : "«" + cur.meaning + "»"; $("pdText").textContent = cur.text;
-  $("pdPrice").textContent = fmt(cur.price); $("pdNote").textContent = cur.note;
+  $("pdPrice").innerHTML = priceHtml(cur.price); $("pdNote").textContent = cur.note;
   render(); pd.showModal();
   history.replaceState(null, "", "#p=" + id);
 }
